@@ -509,7 +509,6 @@ header {
   color: #e2e8f0 !important;
 }
 
-.login-methods {
   background: rgba(15, 23, 42, 0.8);
   backdrop-filter: blur(20px);
   padding: 60px 40px;
@@ -526,7 +525,6 @@ header {
   align-items: center;
 }
 
-.login-methods::before {
   content: '';
   position: absolute;
   top: 0;
@@ -536,11 +534,9 @@ header {
   background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
 }
 
-.login-content {
   text-align: left;
 }
 
-.login-content h3 {
   color: #fff;
   font-size: 36px;
   margin-bottom: 24px;
@@ -551,26 +547,22 @@ header {
   gap: 12px;
 }
 
-.login-content p {
   color: #cbd5e0;
   font-size: 18px;
   line-height: 1.8;
   margin: 20px 0;
 }
 
-.login-content strong {
   color: #e2e8f0;
   font-weight: 700;
 }
 
-.login-decoration {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
 }
 
-.login-decoration-circle {
   width: 300px;
   height: 300px;
   border: 2px solid rgba(99, 102, 241, 0.3);
@@ -582,7 +574,6 @@ header {
   background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
 }
 
-.login-decoration-circle::before {
   content: '';
   position: absolute;
   width: 200px;
@@ -592,7 +583,6 @@ header {
   animation: pulse 3s ease-in-out infinite;
 }
 
-.login-decoration-circle::after {
   content: '';
   position: absolute;
   width: 100px;
@@ -602,7 +592,6 @@ header {
   box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
 }
 
-.login-decoration-icon {
   position: absolute;
   color: #fff;
   font-size: 48px;
@@ -740,7 +729,6 @@ footer {
     padding: 40px 30px;
   }
   
-  .login-methods {
     padding: 40px 20px;
     grid-template-columns: 1fr;
     text-align: center;
@@ -748,30 +736,24 @@ footer {
     max-width: calc(100% - 40px);
   }
   
-  .login-content {
     text-align: center;
   }
   
-  .login-content h3 {
     font-size: 28px;
   }
   
-  .login-decoration-circle {
     width: 200px;
     height: 200px;
   }
   
-  .login-decoration-circle::before {
     width: 140px;
     height: 140px;
   }
   
-  .login-decoration-circle::after {
     width: 80px;
     height: 80px;
   }
   
-  .login-decoration-icon {
     font-size: 36px;
   }
   
@@ -1228,7 +1210,6 @@ button, input, .item-box, .modal-content {
       <a href="api.html" target="_blank"><i class="fas fa-book"></i> Api Docs</a>
       <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
     </div>
-    <div id="header-buttons"><button onclick="openModal()"><i class="fas fa-user"></i> Login</button></div>
   </div>
   
   <!-- Mobile hamburger menu -->
@@ -1242,7 +1223,6 @@ button, input, .item-box, .modal-content {
   <div class="mobile-menu" id="mobile-menu">
     <a href="api.html" target="_blank"><i class="fas fa-book"></i> Api Docs</a>
     <a href="contact.html"><i class="fas fa-phone"></i> Contact</a>
-    <div id="mobile-header-buttons"><button onclick="openModal()"><i class="fas fa-user"></i> Login</button></div>
   </div>
 </header>
 
@@ -1250,7 +1230,6 @@ button, input, .item-box, .modal-content {
   <div class="hero-content">
     <div class="notification-badge" id="notification-badge">&#128640; New stock arrived</div>
     <h2>Get Anonymous &amp; Fresh Accounts</h2>
-    <p>Each account sold is unique and only sold once (not shared). All accounts are registered within the last 4 hours and are continuously checked before selling to customers.</p>
     <p>Do not use accounts to harm others (including, but not limited to - bullying on social networks, comment spam, threats, etc.) or to commit illegal actions (including, but not limited to - fraud, extortion, data theft, etc.).</p>
   </div>
   <div class="scroll-arrow" onclick="scrollToStock()">
@@ -1270,7 +1249,6 @@ button, input, .item-box, .modal-content {
 
 <div class="section" id="long-lived">
   <h2><i class="fas fa-shield-alt"></i> Long Lived Type</h2>
-  <p>Active for 3-6 months, POP3/IMAP enabled. Recommend IMAP login; avoid browser login. Purchase stable Outlook/Hotmail email accounts with guaranteed longevity.</p>
   <div class="container">
     <div class="item-box" id="item-hotmail-trusted">Links</div>
     <div class="item-box" id="item-outlook-trusted">Links</div>
@@ -1295,7 +1273,6 @@ button, input, .item-box, .modal-content {
       <h4>Quick Links</h4>
       <a onclick="scrollToSection('short-lived')" href="mailmart.html">Short Lived Accounts</a>
       <a onclick="scrollToSection('long-lived')" href="mailmart.html">Long Lived Accounts</a>
-      <a onclick="scrollToSection('login-methods')" href="mailmart.html">Account Login Methods</a>
     </div>
     <div class="footer-column">
       <h4>Support</h4>
@@ -1310,14 +1287,10 @@ button, input, .item-box, .modal-content {
 <div class="toast-container" id="toast-container"></div>
 
 <!-- Modal -->
-<div class="modal" id="auth-modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal()">&times;</span>
-    <h3 id="modal-title"><i class="fas fa-sign-in-alt"></i> Login</h3>
     <p class="modal-subtitle">Access Your MailMart Dashboard</p>
     <div class="input-group">
-      <i class="fas fa-user"></i>
-      <input type="text" id="username" placeholder="Username" minlength="3" maxlength="20" pattern="[a-z0-9]+" required>
     </div>
     <div class="input-group">
       <i class="fas fa-lock"></i>
@@ -1331,8 +1304,6 @@ button, input, .item-box, .modal-content {
       <i class="fas fa-eye password-toggle" id="confirm-password-toggle" onclick="togglePassword('confirm-password', 'confirm-password-toggle')"></i>
     </div>
     <div id="turnstile-container" style="display: none;"></div>
-    <button id="auth-button" onclick="submitAuth()"><i class="fas fa-arrow-right"></i> <span id="button-text">Login</span></button>
-    <p id="toggle-text" class="toggle-text">Don't have an account? <span onclick="toggleMode()">Register</span></p>
   </div>
 </div>
 
@@ -1344,12 +1315,8 @@ button, input, .item-box, .modal-content {
 </div>
 
 <script>
-let mode="login";
-let captchaReady = false;
-let deferredAuthAction = null;
 
 function turnstileReady() {
-  captchaReady = true;
 }
 
 // Toggle mobile menu
@@ -1446,21 +1413,11 @@ function scrollToSection(sectionId) {
   }
 }
 
-function openModal(){document.getElementById("auth-modal").style.display="flex"}
-function closeModal(){document.getElementById("auth-modal").style.display="none"}
 function toggleMode(){
-  mode=mode==="login"?"register":"login";
-  const titleIcon = mode==="login"?"fas fa-sign-in-alt":"fas fa-user-plus";
-  const buttonIcon = mode==="login"?"fas fa-arrow-right":"fas fa-user-plus";
   const confirmPasswordGroup = document.getElementById("confirm-password-group");
   
-  document.getElementById("modal-title").innerHTML=`<i class="${titleIcon}"> ${mode==="login"?"Login":"Register"}`;
-  document.getElementById("button-text").textContent=mode==="login"?"Login":"Register";
-  document.querySelector("#auth-modal button").innerHTML=`<i class="${buttonIcon}"> <span id="button-text">${mode==="login"?"Login":"Register"}`;
-  document.getElementById("toggle-text").innerHTML=mode==="login"?'Don\'t have an account? <span onclick="toggleMode()">Register':'Already have an account? <span onclick="toggleMode()">Login';
   
   // Show/hide confirm password field
-  if (mode === "register") {
     confirmPasswordGroup.style.display = "block";
   } else {
     confirmPasswordGroup.style.display = "none";
@@ -1505,21 +1462,13 @@ function resetPasswordToggles() {
   confirmPasswordToggle.classList.add('fa-eye');
 }
 
-function submitAuth() {
-  const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirm-password").value;
-  const button = document.getElementById("auth-button");
 
-  if (!username || !password || (mode === "register" && !confirmPassword)) {
     showToast("Please fill in all fields", "error");
     return;
   }
 
-  if (mode === "register") {
-    const usernameRegex = /^[a-z0-9]+$/;
-    if (username.length < 3 || !usernameRegex.test(username)) {
-      showToast("Username must be at least 3 characters and alphanumeric", "error");
       return;
     }
 
@@ -1534,56 +1483,40 @@ function submitAuth() {
     return;
   }
 
-  if (!captchaReady) {
-    showToast("CAPTCHA not ready, Please wait...", "error");
     return;
   }
 
   button.classList.add("button-loading");
   button.disabled = true;
 
-  // Save auth attempt
-  deferredAuthAction = { username, password };
 
-  // Dynamically render the CAPTCHA and execute
   const widgetId = turnstile.render('#turnstile-container', {
     sitekey: '0x4AAAAAABh8jkDm7E-CQSp1',
     size: 'invisible',
     callback: (token) => {
-      onCaptchaSuccess(token, widgetId);
     }
   });
 
   turnstile.execute(widgetId);
 }
 
-async function onCaptchaSuccess(token, widgetId) {
-  const { username, password } = deferredAuthAction || {};
-  const button = document.getElementById("auth-button");
 
   try {
     const res = await fetch("/" + mode, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password, captcha: token })
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      if (mode === "register") {
-        showToast("Registration Successful! Please Login To Continue.", "success");
-        document.getElementById("username").value = '';
         document.getElementById("password").value = '';
         document.getElementById("confirm-password").value = '';
-        mode = 'register';
         toggleMode();
       } else {
-        showToast("Login Successful! Redirecting To Dashboard...", "success");
         setTimeout(() => window.location.href = "/dashboard", 1500);
       }
     } else {
-      showToast(data.error || "Auth failed", "error");
     }
   } catch (err) {
     showToast("Network Error, Please Reload The Page", "error");
@@ -1592,7 +1525,6 @@ async function onCaptchaSuccess(token, widgetId) {
     document.getElementById("turnstile-container").innerHTML = '';
     button.classList.remove("button-loading");
     button.disabled = false;
-    deferredAuthAction = null;
   }
 }
 
@@ -1626,7 +1558,6 @@ async function fetchItems(){
 }
 
 async function checkSession(){
-  const res=await fetch("/user/info");
   if(res.ok) {
     document.getElementById("header-buttons").innerHTML='<button onclick="location.href=\'/dashboard\'"><i class="fas fa-tachometer-alt"> Dashboard';
     document.getElementById("mobile-header-buttons").innerHTML='<button onclick="location.href=\'/dashboard\'"><i class="fas fa-tachometer-alt"> Dashboard';
@@ -1640,12 +1571,9 @@ document.getElementById("year").textContent=new Date().getFullYear();
 document.querySelectorAll('.item-box').forEach(box => {
   box.addEventListener('click', async () => {
     try {
-      const res = await fetch('/user/info');
       if (res.ok) {
-        // User is logged in
         window.location.href = '/dashboard';
       } else {
-        // Not logged in, show login modal
         openModal();
       }
     } catch (error) {
@@ -1667,273 +1595,7 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<!-- Login/Register Popup System -->
-<style>
-  .popup-overlay {
-    display: none;
-    position: fixed;
-    z-index: 10001;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-  .popup-box {
-    background: #1e1e1e;
-    color: white;
-    width: 300px;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 12px;
-    position: relative;
-  }
-  .popup-box input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-  }
-  .popup-box button {
-    width: 100%;
-    padding: 10px;
-    background: #6a0dad;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    font-weight: bold;
-  }
-  .register-btn {
-    background: none;
-    color: #2196f3;
-    text-align: right;
-    margin-top: -8px;
-    font-size: 13px;
-    cursor: pointer;
-  }
-</style>
 
-<!-- Login Popup -->
-<div class="popup-overlay" id="loginPopup">
-  <div class="popup-box">
-    <h3>Login</h3>
-    <input id="loginUser" placeholder="Username" />
-    <input id="loginPass" placeholder="Password" type="password" />
-    <button onclick="loginUser()">Login</button>
-    <div class="register-btn" onclick="togglePopup('loginPopup', 'registerPopup')">Register</div>
-  </div>
-</div>
-
-<!-- Register Popup -->
-<div class="popup-overlay" id="registerPopup">
-  <div class="popup-box">
-    <h3>Register</h3>
-    <input id="regUser" placeholder="Username" />
-    <input id="regPass" placeholder="Password" type="password" />
-    <input id="regConfirm" placeholder="Confirm Password" type="password" />
-    <button onclick="registerUser()">Register</button>
-  </div>
-</div>
-
-<script>
-  let users = {};
-
-  function togglePopup(hideId, showId) {
-    document.getElementById(hideId).style.display = "none";
-    document.getElementById(showId).style.display = "block";
-  }
-
-  function showLogin() {
-    document.getElementById('loginPopup').style.display = 'block';
-  }
-
-  function registerUser() {
-    const user = document.getElementById("regUser").value;
-    const pass = document.getElementById("regPass").value;
-    const confirm = document.getElementById("regConfirm").value;
-    if (user && pass && confirm) {
-      if (pass !== confirm) {
-        alert("Passwords do not match!");
-        return;
-      }
-      users[user] = pass;
-      alert("Registered! Now login.");
-      togglePopup('registerPopup', 'loginPopup');
-    } else {
-      alert("Please fill all fields.");
-    }
-  }
-
-  function loginUser() {
-    const user = document.getElementById("loginUser").value;
-    const pass = document.getElementById("loginPass").value;
-    if (users[user] === pass) {
-      window.location.href = "coming-soon.html";
-    } else {
-      alert("Invalid username or password.");
-    }
-  }
-
-  window.onclick = function(e) {
-    if (e.target.classList.contains('popup-overlay')) {
-      e.target.style.display = 'none';
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.querySelector(".dropdown-content");
-    if (menu) {
-      const loginBtn = document.createElement("a");
-      loginBtn.innerText = "Login";
-      loginBtn.href = "#";
-      loginBtn.onclick = showLogin;
-      menu.appendChild(loginBtn);
-    }
-  });
-</script>
-
-
-<!-- Login/Register Popup System -->
-<style>
-  .popup-overlay {
-    display: none;
-    position: fixed;
-    z-index: 10001;
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-  .popup-box {
-    background: #1e1e1e;
-    color: white;
-    width: 300px;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 12px;
-    position: relative;
-  }
-  .popup-box input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-  }
-  .popup-box button {
-    width: 100%;
-    padding: 10px;
-    background: #6a0dad;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    font-weight: bold;
-  }
-  .register-btn {
-    background: none;
-    color: #2196f3;
-    text-align: right;
-    margin-top: -8px;
-    font-size: 13px;
-    cursor: pointer;
-  }
-</style>
-
-<!-- Login Popup -->
-<div class="popup-overlay" id="loginPopup">
-  <div class="popup-box">
-    <h3>Login</h3>
-    <input id="loginUser" placeholder="Username" />
-    <input id="loginPass" placeholder="Password" type="password" />
-    <button onclick="loginUser()">Login</button>
-    <div class="register-btn" onclick="togglePopup('loginPopup', 'registerPopup')">Register</div>
-  </div>
-</div>
-
-<!-- Register Popup -->
-<div class="popup-overlay" id="registerPopup">
-  <div class="popup-box">
-    <h3>Register</h3>
-    <input id="regUser" placeholder="Username" />
-    <input id="regPass" placeholder="Password" type="password" />
-    <input id="regConfirm" placeholder="Confirm Password" type="password" />
-    <button onclick="registerUser()">Register</button>
-  </div>
-</div>
-
-<script>
-  let users = {};
-
-  function togglePopup(hideId, showId) {
-    document.getElementById(hideId).style.display = "none";
-    document.getElementById(showId).style.display = "block";
-  }
-
-  function showLogin() {
-    document.getElementById('loginPopup').style.display = 'block';
-  }
-
-  function registerUser() {
-    const user = document.getElementById("regUser").value;
-    const pass = document.getElementById("regPass").value;
-    const confirm = document.getElementById("regConfirm").value;
-    if (user && pass && confirm) {
-      if (pass !== confirm) {
-        alert("Passwords do not match!");
-        return;
-      }
-      users[user] = pass;
-      alert("Registered! Now login.");
-      togglePopup('registerPopup', 'loginPopup');
-    } else {
-      alert("Please fill all fields.");
-    }
-  }
-
-  function loginUser() {
-    const user = document.getElementById("loginUser").value;
-    const pass = document.getElementById("loginPass").value;
-    if (users[user] === pass) {
-      window.location.href = "coming-soon.html";
-    } else {
-      alert("Invalid username or password.");
-    }
-  }
-
-  window.onclick = function(e) {
-    if (e.target.classList.contains('popup-overlay')) {
-      e.target.style.display = 'none';
-    }
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.querySelector(".dropdown-content");
-    if (menu) {
-      const loginBtn = document.createElement("a");
-      loginBtn.innerText = "Login";
-      loginBtn.href = "#";
-      loginBtn.onclick = showLogin;
-      menu.appendChild(loginBtn);
-    }
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.querySelector(".dropdown-content");
-    if (menu) {
-      const loginLink = document.createElement("a");
-      loginLink.innerText = "Login";
-      loginLink.style.color = "#2196f3";
-      loginLink.style.fontSize = "14px";
-      loginLink.href = "#";
-      loginLink.onclick = showLogin;
-      menu.appendChild(loginLink);
-    }
-  });
-</script>
 
 </body>
 </html>
