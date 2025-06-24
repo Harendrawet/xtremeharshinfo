@@ -214,6 +214,8 @@ header {
   background: linear-gradient(135deg, #5856eb 0%, #7c3aed 100%);
 }
 
+/* Loader Animation */
+.loader {
   width: 200px;
   height: 4px;
   background: rgba(99, 102, 241, 0.2);
@@ -223,6 +225,7 @@ header {
   margin: 20px auto;
 }
 
+.loader::before {
   content: '';
   position: absolute;
   top: 0;
@@ -231,8 +234,10 @@ header {
   width: 50px;
   background: linear-gradient(90deg, transparent, #6366f1, transparent);
   border-radius: 2px;
+  animation: loader-slide 2s ease-in-out infinite;
 }
 
+@keyframes loader-slide {
   0% {
     transform: translateX(-100px);
   }
@@ -661,11 +666,13 @@ footer {
   color: #6366f1;
 }
 
+/* Loading animation for stock updates */
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
 }
 
+.loading {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
@@ -1081,10 +1088,13 @@ button, input, .item-box, .modal-content {
   color: #fff;
 }
 
+/* Button Loading Animation */
+.button-loading {
   position: relative;
   color: transparent !important;
 }
 
+.button-loading::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -1103,6 +1113,8 @@ button, input, .item-box, .modal-content {
   100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+/* Full Screen Loader */
+.fullscreen-loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -1117,19 +1129,23 @@ button, input, .item-box, .modal-content {
   transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
+.fullscreen-loader.hidden {
   opacity: 0;
   visibility: hidden;
 }
 
+.fullscreen-loader-content {
   text-align: center;
 }
 
+.fullscreen-loader-logo {
   width: 200px;
   height: auto;
   margin-bottom: 40px;
   opacity: 0.9;
 }
 
+.fullscreen-loader-bar {
   width: 250px;
   height: 10px;
   background: rgba(99, 102, 241, 0.2);
@@ -1139,6 +1155,7 @@ button, input, .item-box, .modal-content {
   margin: 20px auto;
 }
 
+.fullscreen-loader-bar::before {
   content: '';
   position: absolute;
   top: 0;
@@ -1147,8 +1164,10 @@ button, input, .item-box, .modal-content {
   width: 60px;
   background: linear-gradient(90deg, transparent, #6366f1, transparent);
   border-radius: 5px;
+  animation: fullscreen-loader-slide 2s ease-in-out infinite;
 }
 
+@keyframes fullscreen-loader-slide {
   0% {
     transform: translateX(-80px);
   }
@@ -1160,6 +1179,7 @@ button, input, .item-box, .modal-content {
   }
 }
 
+.fullscreen-loader-text {
   color: #cbd5e0;
   font-size: 16px;
   font-weight: 500;
@@ -1259,6 +1279,8 @@ button, input, .item-box, .modal-content {
 </div>
 
 
+  
+  </div>
 </div>
 
 <footer>
@@ -1273,7 +1295,7 @@ button, input, .item-box, .modal-content {
       <h4>Quick Links</h4>
       <a onclick="scrollToSection('short-lived')" href="mailmart.html">Short Lived Accounts</a>
       <a onclick="scrollToSection('long-lived')" href="mailmart.html">Long Lived Accounts</a>
-      <a onclick="window.location.href='coming-soon.html'" href="mailmart.html">Account Login Methods</a>
+      <a onclick="scrollToSection('login-methods')" href="mailmart.html">Account Login Methods</a>
     </div>
     <div class="footer-column">
       <h4>Support</h4>
@@ -1314,14 +1336,20 @@ button, input, .item-box, .modal-content {
   </div>
 </div>
 
+<!-- Full Screen Loader -->
+<div class="fullscreen-loader" id="fullscreen-loader">
+  <div class="fullscreen-loader-content">
+    <div class="fullscreen-loader-bar"></div>
   </div>
 </div>
 
 <script>
 let mode="login";
+let captchaReady = false;
 let deferredAuthAction = null;
 
 function turnstileReady() {
+  captchaReady = true;
 }
 
 // Toggle mobile menu
@@ -1332,10 +1360,15 @@ function toggleMobileMenu() {
   mobileMenu.classList.toggle('active');
 }
 
+// Hide fullscreen loader after page loads
 window.addEventListener('load', function() {
   setTimeout(() => {
+    const loader = document.getElementById('fullscreen-loader');
+    loader.classList.add('hidden');
     setTimeout(() => {
+      loader.style.display = 'none';
     }, 500);
+  }, 1500); // Show loader for 1.5 seconds minimum
 });
 
 // Dynamic notification badge messages
@@ -1501,23 +1534,30 @@ function submitAuth() {
     return;
   }
 
+  if (!captchaReady) {
+    showToast("CAPTCHA not ready, Please wait...", "error");
     return;
   }
 
+  button.classList.add("button-loading");
   button.disabled = true;
 
   // Save auth attempt
   deferredAuthAction = { username, password };
 
+  // Dynamically render the CAPTCHA and execute
   const widgetId = turnstile.render('#turnstile-container', {
     sitekey: '0x4AAAAAABh8jkDm7E-CQSp1',
     size: 'invisible',
+    callback: (token) => {
+      onCaptchaSuccess(token, widgetId);
     }
   });
 
   turnstile.execute(widgetId);
 }
 
+async function onCaptchaSuccess(token, widgetId) {
   const { username, password } = deferredAuthAction || {};
   const button = document.getElementById("auth-button");
 
@@ -1525,6 +1565,7 @@ function submitAuth() {
     const res = await fetch("/" + mode, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password, captcha: token })
     });
 
     const data = await res.json();
@@ -1549,6 +1590,7 @@ function submitAuth() {
   } finally {
     turnstile.remove(widgetId);
     document.getElementById("turnstile-container").innerHTML = '';
+    button.classList.remove("button-loading");
     button.disabled = false;
     deferredAuthAction = null;
   }
@@ -1556,7 +1598,9 @@ function submitAuth() {
 
 async function fetchItems(){
   try{
+    // Add loading animation
     const priceElements = document.querySelectorAll('.price, .live, .stock');
+    priceElements.forEach(el => el.classList.add('loading'));
     
     const res=await fetch("/api/mail/getStock");
     const data=await res.json();
@@ -1571,9 +1615,13 @@ async function fetchItems(){
       }
     });
     
+    // Remove loading animation
+    priceElements.forEach(el => el.classList.remove('loading'));
   }catch(e){
     console.error("API Error",e);
+    // Remove loading animation on error too
     const priceElements = document.querySelectorAll('.price, .live, .stock');
+    priceElements.forEach(el => el.classList.remove('loading'));
   }
 }
 
@@ -1618,35 +1666,6 @@ document.addEventListener('click', function(e) {
   }
 });
 </script>
-
-<!-- Cleaned Custom Register/Login System -->
-
-
-<script>
-  let users = {};
-
-  function registerUser() {
-    const user = document.getElementById("regUser").value;
-    const pass = document.getElementById("regPass").value;
-    if (user && pass) {
-      users[user] = pass;
-      alert("Registered successfully. You can now login.");
-    } else {
-      alert("Please fill both fields.");
-    }
-  }
-
-  function loginUser() {
-    const user = document.getElementById("loginUser").value;
-    const pass = document.getElementById("loginPass").value;
-    if (users[user] === pass) {
-      window.location.href = "coming-soon.html";
-    } else {
-      alert("Invalid login.");
-    }
-  }
-</script>
-
 
 <!-- Login/Register Popup System -->
 <style>
@@ -1761,11 +1780,9 @@ document.addEventListener('click', function(e) {
       e.target.style.display = 'none';
     }
   }
-</script>
 
-<script>
   document.addEventListener("DOMContentLoaded", () => {
-    const menu = document.querySelector(".dropdown-content"); // typical class
+    const menu = document.querySelector(".dropdown-content");
     if (menu) {
       const loginBtn = document.createElement("a");
       loginBtn.innerText = "Login";
